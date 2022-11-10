@@ -32,6 +32,9 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="345" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <action selector="inputDidChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="hB7-So-Wet"/>
+                                                </connections>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="evH-8e-pMb">
                                                 <rect key="frame" x="0.0" y="34" width="345" height="12"/>
@@ -64,14 +67,37 @@
                                     <action selector="validatePassword:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Kk4-GM-1YS"/>
                                 </connections>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oJl-ZD-6tj">
+                                <rect key="frame" x="15" y="310.5" width="345" height="34.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="비밀번호 추천 받기 👉🏻" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JIA-nZ-ccK">
+                                        <rect key="frame" x="0.0" y="0.0" width="291.5" height="34.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" horizontalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bEt-OA-bin">
+                                        <rect key="frame" x="291.5" y="0.0" width="53.5" height="34.5"/>
+                                        <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="추천"/>
+                                        <connections>
+                                            <action selector="generateVeryStrongPassword:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yaF-JL-czL"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="oJl-ZD-6tj" secondAttribute="trailing" constant="15" id="7cF-80-Wun"/>
                             <constraint firstItem="8NM-Fj-fSn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="A68-gf-Ho7"/>
                             <constraint firstItem="Tw5-uH-oCH" firstAttribute="centerX" secondItem="8NM-Fj-fSn" secondAttribute="centerX" id="AVh-Zr-RvA"/>
                             <constraint firstItem="Tw5-uH-oCH" firstAttribute="top" secondItem="8NM-Fj-fSn" secondAttribute="bottom" constant="30" id="Zhu-tf-w4n"/>
+                            <constraint firstItem="oJl-ZD-6tj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="avB-eE-Rfq"/>
                             <constraint firstItem="8NM-Fj-fSn" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="80" id="bea-gQ-KeI"/>
+                            <constraint firstItem="oJl-ZD-6tj" firstAttribute="top" secondItem="Tw5-uH-oCH" secondAttribute="bottom" constant="40" id="pbW-XD-FXZ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8NM-Fj-fSn" secondAttribute="trailing" constant="15" id="uvz-Nc-hox"/>
                         </constraints>
                     </view>
@@ -79,6 +105,7 @@
                         <outlet property="descriptionLabel" destination="g7x-Hl-4Id" id="GYW-KL-X4N"/>
                         <outlet property="levelView" destination="evH-8e-pMb" id="HPc-XS-ckw"/>
                         <outlet property="passwordInput" destination="4eo-fd-wd8" id="401-tl-niH"/>
+                        <outlet property="recommandedPasswordLabel" destination="JIA-nZ-ccK" id="Gqe-cL-cXX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -92,6 +119,9 @@
         </systemColor>
         <systemColor name="systemGray2Color">
             <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

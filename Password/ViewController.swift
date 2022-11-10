@@ -9,17 +9,40 @@ import UIKit
 
 class ViewController: UIViewController {
   
+  let essentialChars = ["abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+                        "0123456789",
+                        "~!@#$%^&*"]
+  let specialCharSet = CharacterSet(charactersIn: "~!@#$%^&*")
+  
   @IBOutlet weak var passwordInput: UITextField!
   
   @IBOutlet weak var levelView: UIView!
   
   @IBOutlet weak var descriptionLabel: UILabel!
   
+  @IBOutlet weak var recommandedPasswordLabel: UILabel!
+  
   override func viewDidLoad() {
     super.viewDidLoad()
   }
   
   @IBAction func validatePassword(_ sender: Any) {
+    checkPasswordLevel()
+  }
+  
+  @IBAction func inputDidChanged(_ sender: Any) {
+    checkPasswordLevel()
+  }
+  
+  @IBAction func generateVeryStrongPassword(_ sender: Any) {
+    var result = ""
+    essentialChars.forEach { result += String($0.randomElement()!) }
+    result += String(essentialChars.reduce("", { $0 + $1 })
+      .shuffled().prefix(6))
+    recommandedPasswordLabel.text = String(result.shuffled())
+  }
+  
+  func checkPasswordLevel() {
     guard let inputText = passwordInput.text else { return }
     let password = inputText.trimmingCharacters(in: .whitespacesAndNewlines)
     guard password.count >= 0 else { return }
@@ -53,7 +76,7 @@ class ViewController: UIViewController {
       if CharacterSet.lowercaseLetters.contains(char) ||
           CharacterSet.uppercaseLetters.contains(char)  { alphabetCount += 1 }
       else if CharacterSet.decimalDigits.contains(char) { numCount += 1 }
-      else if CharacterSet(charactersIn: "~!@#$%^&*").contains(char) { symbolCount += 1 }
+      else if specialCharSet.contains(char) { symbolCount += 1 }
     }
     
     if password.count < 8 {
@@ -68,6 +91,4 @@ class ViewController: UIViewController {
     
     return 3
   }
-  
-
 }
