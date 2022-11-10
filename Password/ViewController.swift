@@ -19,6 +19,33 @@ class ViewController: UIViewController {
     super.viewDidLoad()
   }
   
+  @IBAction func validatePassword(_ sender: Any) {
+    guard let inputText = passwordInput.text else { return }
+    let password = inputText.trimmingCharacters(in: .whitespacesAndNewlines)
+    guard password.count >= 0 else { return }
+    
+    let level = passwordValidator(password: password)
+    switch level {
+    case 1:
+      levelView.backgroundColor = .red
+      descriptionLabel.text = "아주 약한 암호"
+    case 2:
+      levelView.backgroundColor = .orange
+      descriptionLabel.text = "약한 암호"
+    case 3:
+      levelView.backgroundColor = .yellow
+      descriptionLabel.text = "보통 암호"
+    case 4:
+      levelView.backgroundColor = .blue
+      descriptionLabel.text = "강한 암호"
+    case 5:
+      levelView.backgroundColor = .green
+      descriptionLabel.text = "아주 강한 암호"
+    default:
+      break
+    }
+  }
+  
   func passwordValidator(password: String) -> Int {
     var (alphabetCount, numCount, symbolCount) = (0, 0, 0)
     
@@ -44,4 +71,3 @@ class ViewController: UIViewController {
   
 
 }
-
