@@ -8,12 +8,18 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+  
+  @IBOutlet weak var passwordInput: UITextField!
+  
+  @IBOutlet weak var levelView: UIView!
+  
+  @IBOutlet weak var descriptionLabel: UILabel!
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view.
   }
-
+  
+  
 
 }
 
