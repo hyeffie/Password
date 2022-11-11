@@ -36,11 +36,9 @@ struct Password {
     }
   }
   
-  static let essentialChars = ["abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
-                               "0123456789",
-                               "~!@#$%^&*"]
-
-  static let specialCharSet = CharacterSet(charactersIn: "~!@#$%^&*")
+  static let letters = "abcdefghijklmnopqrstuvwxyz"
+  
+  static let specialChars = "~!@#$%^&*"
   
   var words: String
   
@@ -52,7 +50,7 @@ struct Password {
       if CharacterSet.lowercaseLetters.contains(char) ||
           CharacterSet.uppercaseLetters.contains(char)  { alphabetCount += 1 }
       else if CharacterSet.decimalDigits.contains(char) { numCount += 1 }
-      else if CharacterSet(charactersIn: "~!@#$%^&*").contains(char) { symbolCount += 1 }
+      else if CharacterSet(charactersIn: Password.specialChars).contains(char) { symbolCount += 1 }
     }
     
     if self.words.count < 8 {
@@ -66,11 +64,25 @@ struct Password {
     return .three
   }
   
-  static func generateVeryStrongPassword() -> String {
+  static func generateVeryStrongPassword(length: Int) -> String {
+    let remaining = (length >= 8 ? length : 8) - 3
+    let numberOfDigits = (0 ..< remaining).randomElement() ?? 0
+    let numberOfLetters = (0 ..< remaining - numberOfDigits).randomElement() ?? 0
+    let numberOfSpecialChars = remaining - (numberOfDigits + numberOfLetters)
+    
     var result = ""
-    essentialChars.forEach { result += String($0.randomElement()!) }
-    result += String(essentialChars.reduce("", { $0 + $1 })
-      .shuffled().prefix(6))
+    (0 ..< numberOfDigits + 1).forEach { _ in
+      let randomDigit = (0 ... 9).randomElement()!
+      result.append(String(randomDigit))
+    }
+    (0 ..< numberOfLetters + 1).forEach { _ in
+      let randomLetter = letters.randomElement()!
+      result.append(Bool.random() ? randomLetter.uppercased() : randomLetter.lowercased())
+    }
+    (0 ..< numberOfLetters + 1).forEach { _ in
+      result.append(specialChars.randomElement()!)
+    }
+    
     return String(result.shuffled())
   }
 }

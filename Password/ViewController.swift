@@ -30,7 +30,7 @@ class ViewController: UIViewController {
   }
   
   @IBAction func generatePassword(_ sender: Any) {
-    recommandedPasswordLabel.text = Password.generateVeryStrongPassword()
+    recommandedPasswordLabel.text = Password.generateVeryStrongPassword(length: 12)
   }
   
   private func updatePasswordLevel() {
