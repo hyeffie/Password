@@ -79,7 +79,7 @@ struct Password {
       let randomLetter = letters.randomElement()!
       result.append(Bool.random() ? randomLetter.uppercased() : randomLetter.lowercased())
     }
-    (0 ..< numberOfLetters + 1).forEach { _ in
+    (0 ..< numberOfSpecialChars + 1).forEach { _ in
       result.append(specialChars.randomElement()!)
     }
     
